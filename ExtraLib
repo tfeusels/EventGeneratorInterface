@@ -1,0 +1,5 @@
+export CERN=~trt2kmgr/packages/cernlib/neut18_gcc446
+export ROOTSYS=~trt2kmgr/tools/v1r49/ROOT/v5r34p09n01/Linux-x86_64
+export CERN_LEVEL=2005
+export PATH=${CERN}/${CERN_LEVEL}/bin:${ROOTSYS}/bin:$PATH
+export LD_LIBRARY_PATH=${ROOTSYS}/lib/root:${LD_LIBRARY_PATH}

@@ -1,0 +1,344 @@
+C========================================================================
+C  Input card for Super-Kamiokande Monte Carlo simulation
+C========================================================================
+C
+C Number of events ; EVCT-NEVT
+C
+EVCT-NEVT  1000000
+C
+C--------------------------------
+C
+C Particle Code ; EVCT-IDPT
+C
+EVCT-IDPT 14
+C
+C--------------------------------
+C
+C fixed  VERTEX ; EVCT-MPOS 1
+C random VERTEX ; EVCT-MPOS 2
+C
+C EVCT-MPOS 1
+C VECT-POS  100. 0. 0.
+C
+EVCT-MPOS 2
+EVCT-RAD  100.
+C
+C--------------------------------
+C
+C fixed  DIRECTION ; EVCT-MDIR 1
+C random DIRECTION ; EVCT-MDIR 2
+C
+EVCT-MDIR 1
+EVCT-DIR 0. 0. 1.
+C
+C
+C--------------------------------
+C
+C fixed  MOMENTUM ; EVCT-MPV 1
+C random MOMENTUM ; EVCT-MPV 2
+C
+C random MOMENTUM based on flux times cross section distribution
+C EVCT-MPV 3
+C EVCT-FILENM : name of ROOT file containing flux histogram
+C EVCT-HISTNM : flux histogram name
+C EVCT-INMEV  : flag for histograms in MeV
+C               (MeV => 1, GeV => 0)
+C
+EVCT-MPV 1
+EVCT-PV  600.
+CEVCT-MPV 2
+CEVCT-PV  50.  1000.
+C
+CEVCT-MPV 3
+CEVCT-FILENM  't2k_skflux_numu_o.root'
+CEVCT-HISTNM  'flux_numu'
+CEVCT-INMEV 0
+C
+C
+C **** TARGET INFORMATION ****
+C
+C NUMBNDN : total number of neutron (Default is H2O)
+C           (e.g. CH => 6, H2O => 8, Ar => 22, Fe => 30)
+C
+CNEUT-NUMBNDN 8
+C
+C NUMBNDP : total number of bound proton (Default is H2O)
+C           (e.g. CH => 6, H2O => 8, Ar => 18, Fe => 26)
+C
+CNEUT-NUMBNDP 8
+C
+C NUMFREP : total number of free proton (Default is H2O)
+C           (e.g. CH => 1, H2O => 2, Ar => 0, Fe => 0)
+C
+CNEUT-NUMFREP 2
+C
+C NUMATOM : atomic number of atom heavier than hydrogen
+C           (e.g. CH => 12, H2O =>16, Ar => 40, Fe => 56)
+C
+CNEUT-NUMATOM 16
+C
+C
+C Fermi-Gas perameters are target nucleus dependent
+C Set by default in neutcore/nesetfgparams.F
+C
+CNEUT-PFSURF 0.225
+CNEUT-PFMAX  0.225
+CNEUT-VNUINI -0.027
+CNEUT-VNUFIN 0.0
+C
+C **** NEUTRINO INTERACTION ****
+C
+C FERM : Fermi motion  0 : on ( default )  1 : off
+C
+CNEUT-FERM 0
+C
+C PAUL : Pauli blocking  0 : on ( default )  1 : off
+C
+CNEUT-PAUL 0
+C
+C NEFF : Nuclear effect in O16  0 : on ( default )  1 : off
+C
+CNEUT-NEFF 0
+C
+C   IFORMLEN: FORMATION zone effect ON/OFF
+C              IFORMLEN=   1  : ALL ON (default)
+C              IFORMLEN=   0  : ALL OFF
+C              IFORMLEN= 110  : OFF for QE/Elastic
+C              IFORMLEN= 100  : ON  for mPi/DIS only
+C
+CNEUT-IFORMLEN 1
+C
+C Resonant Pion-less Delta Decay (20% Default)
+C   IPILESSDCY: 1: on (default), 0: off
+C   RPILESSDCY: Fraction of 1pi events (0.2 default)
+C 
+CNEUT-IPILESSDCY 1
+CNEUT-RPILESSDCY 0.2
+C
+C
+C ABSPIEMIT : Nucleon emission after absorption of pi 1: on (default) 0: off
+C 
+CNEUT-ABSPIEMIT 1
+C
+C
+C NUSIM : Toggle neutrino simulation or not (piscat/gampi) 1: yes (default) 0: no
+C
+CNEUT-NUSIM 1
+C
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+C
+C MODL : Toggle between low energy pion mean free path models 
+C ( momentum of pi < 500MeV/c, but also add absorption for p > 500 MeV/c)
+C                 0: Salcedo et al. calculation (used in productions prior to 2011)
+C                 1: Tuned to pion scattering data (default)
+C
+CNEUT-MODL 1
+C
+C
+C MODH : Toggle between high energy pion mfp models ( momentum of pi > 500MeV/c )
+C                 0: p/n cross sections normalized to pion-deuteron (prior to 2011)
+C                 1: Actual p or n cross section used; Intermediate pion charge fixed;
+C                    p/n density considered for non-isoscalar nuclei (default)
+C
+CNEUT-MODH 1
+C
+C KINMODH : Toggle between high energy pion quasielastic scattering models 
+C           (Only relevant if FEFQEHF > 0)
+C                                          ( momentum of pi > 500MeV/c )
+C                 0: Isotropic decay of some resonance (Deprecated, do not use)
+C                 1: SAID Phase shift analysis + Artificial Fwd. Scatter (default)
+C
+CNEUT-KINH 1
+C
+C
+C          ( Prior to 2011: All pion FEFMFP scaling = 1.0 )
+C
+C FEFQE : Factor to modify pion quasi-elastic scattering mean free path
+C                           ( momentum of pi < 500MeV/c )
+CNEUT-FEFQE 1.
+C
+C
+C FEFABS : Factor to modify pion absorption mean free path
+C          ( Tune to pion scattering data: 1.1, default )
+CNEUT-FEFABS 1.1
+C
+C
+C FEFINEL : Factor to modify pion hadron production mean free path
+C                           ( momentum of pi > 500MeV/c )
+CNEUT-FEFINEL 1.
+C
+C
+C FEFCOH : Factor to modify pion foward scattering mean free path
+C                           ( momentum of pi > 500MeV/c )
+CNEUT-FEFCOH 1.
+C
+C
+C FEFQEH : Factor to modify quasielastic scattering mean free path
+C                           ( momentum of pi > 500MeV/c )
+C          ( Tune to pion scattering data: 1.8, default )
+CNEUT-FEFQEH 1.8
+C
+C
+C FEFCX  : Factor to modify charge exchange amplitude
+C                           ( momentum of pi < 500MeV/c )
+CNEUT-FEFCX 1.
+C
+C
+C FEFCXH  : Factor to modify charge exchange mean free path
+C                           ( momentum of pi > 500MeV/c )
+C          ( Tune to pion scattering data: 1.8, default )
+CNEUT-FEFCXH 1.8
+C
+C
+C FEFQEHF: Portion of QE scattering that has inelastic-like kinematics 
+C                           ( momentum of pi > 500MeV/c )
+C
+C NEUT-FEFQEHF 0. ! all forward-like scattering (prior to 2011)
+C                 ! ( 1 = Tune to pion scattering data, mix of quasielastic
+C                         and forward-like scattering, default)
+CNEUT-FEFQEHF 1.
+C
+C
+C FEFCXHF: Portion of inel. scattering that includes true CX
+C                           ( momentum of pi > 500MeV/c , MODH=1 only)
+C
+C NEUT-FEFCXHF 0. ! pi+,neutron charge exchange and inelastic
+C                   cross sections separated (default)
+CNEUT-FEFCXHF 0.
+C
+C
+C FEFCOHF: Amount of forward scatter relative to quasi-elastic (p<500)
+C
+CNEUT-FEFCOHF 0. ! Default, no forward scattering at low momenta
+CNEUT-FEFCOHF 0.
+C
+C FEFCOUL: Pion trajectory modified by Coulomb field
+C
+CNEUT-FEFCOUL 0. ! Default, no Coulomb correction
+CNEUT-FEFCOUL 0
+C
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+C Nucleon rescattering
+C 
+C NUCRES-RESCAT  1: on (default) 0: off
+C 
+CNUCRES-RESCAT 1
+C
+C NUCRES-XNUCFACT  cross-section factor to study uncertainty default = 1.
+C
+CNUCRES-FACT 1.
+C
+C
+C
+C
+C MODE : Interaction mode
+C                     0 : normal ( default )
+C                    -1 : input cross section by CRSNEUT
+C                     n : sellect one mode ( n > 0 )   See nemodsel.F
+C                           n =  1 : charged current Q.E. 
+C			    n =  2 : charged current npnh (Nieves)	
+C                           n = 11,12,13
+C                                  : charged current Single pi production
+C                           n = 16 : coherent Single pi production
+C                           n = 21 : charged current Multi pi production
+C                           n = 31,32,33,34
+C                                  : neutral current Single pi production
+C                           n = 36 : coherent Single pi production
+C                           n = 41 : neutral current Multi pi production
+C                           n = 51,52 : neutral current elastic 
+C                           n = 22,42,43 : single eta production 
+C                           n = 23,44,45 : single  K  production 
+C			                    
+NEUT-MODE   0 
+C
+C  nu                     nub
+C  1:     CC Q.E.         CC Q.E.( Free )
+C  2-4:   CC 1pi          CC 1pi
+C  5:     CC DIS 1320     CC DIS 1.3 < W < 2.0
+C  6-9:   NC 1pi          NC 1pi
+C  10:    NC DIS 1320     NC DIS 1.3 < W < 2.0
+C  11:    NC els          CC Q.E.( Bound )
+C  12:    NC els          NC els
+C  13:    NC els          NC els
+C  14:    coherent        NC els
+C  15:    coherent        coherent
+C  16:    CC eta          coherent
+C  17     NC eta          CC eta
+C  18:    NC eta          NC eta
+C  19:    CC K            NC eta
+C  20     NC K            CC K
+C  21:    NC K            NC K
+C  22:    N/A             NC K
+C  23:    CC DIS          CC DIS (W > 2.0)
+C  24:    NC DIS          NC DIS (W > 2.0)
+C  25:    CC 1 gamma      CC 1 gamma
+C  26,27: NC 1 gamma      NC 1 gamma
+C  28 	  2p2h nn/np	  2p2h np/pp				
+C
+C
+C CRS  :  Multiplied factor to cross section on each mode. ( neu )
+C CSRB :  Multiplied factor to cross section on each mode. ( neu-bar )
+C
+C          1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28
+CNEUT-CRSB   0 0 0 0 0 0 0 0 0 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1
+CNEUT-CRSB 1 1 1 1 1 1 1 1 1 1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1
+NEUT-CRS   1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.
+NEUT-CRSB  1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.
+C
+C  PDF for DIS is set in this section
+C  (GRV94DI -> 7, GRV98_LO -> 12 (default))
+CNEUT-PDF    12
+C  Which PDF is used ( original=0, modified=1 (default))
+CNEUT-BODEK   1
+C  Select Coherent pion model (Rein & Sehgal=0(default), Kartavtsev et al.=1
+CNEUT-COHEPI  0
+C
+C  CCQE Axial Mass (For simulation, must be set to: 1.01, 1.11, 1.21{default}. 1.31)
+CNEUT-MAQE 1.21
+C
+C  CC1pi Axial Mass (For simulation, must be set to: 1.21{default}, 1.11)
+CNEUT-MASPI 1.21
+C
+C  CCQE Vector Mass (Default: 0.84)
+CNEUT-MVQE 0.84
+C
+C  CC1pi Vector Mass (Default: 0.84)
+CNEUT-MVSPI 0.84
+C
+C  CCQE Kappa Factor (Default: 1.0)
+CNEUT-KAPP 1.0
+C
+C  Coherent Pion Axial Mass (Default: 1.0)
+CNEUT-MACOH 1.0	 
+C
+C  Coherent Pion Nuclear Radios (Default: 1.0 fm)
+CNEUT-R0COH 1.0	 
+C
+C MDLQE    : CC Quasi-elastic / NC elastic model
+C          : xx1 : Smith-Moniz for CC
+C          : xx2 : Smith-Moniz for CC with BBBA05
+C          : xx3 : Smith-Moniz for CC with BBBA07
+C          : x0x : Scaling to CCQE     ( same as 5.0.x )
+C          : x1x : Scaling to Spectrum func. with Dipole
+C          : x2x : Scaling to Spectrum func. with BBBA05
+C          : x3x : Scaling to Spectrum func. with BBBA07
+C          : 1xx : Transverse enhancement (0: off, default)
+C          : 4x1 : Full spectral function with dipole
+C          : 4x2 : Full spectral function with BBBA05
+C          : 4x3 : Full spectral function with BBBA07C
+C
+NEUT-MDLQE 402
+C
+C
+C RAND : random seed
+C      0 : Read RANDOM number from FILE
+C      1 : Generating RANDOM SEED from the time
+C
+NEUT-RAND 1
+C
+C QUIET : Screen output verbosity
+C         0 : Default (prints all initial state info)
+C         1 : Print only interaction mode and neutrino energy
+C         2 : Prints almost nothing (except PYTHIA output)
+C
+NEUT-QUIET 2
